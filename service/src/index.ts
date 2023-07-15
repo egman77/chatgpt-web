@@ -82,8 +82,8 @@ router.post('/verify', async (req, res) => {
   }
 })
 
-app.use('', router)
-app.use('/api', router)
-app.set('trust proxy', 1)
+app.use('', router);//可以直接
+app.use('/api', router);//也可以使用api
+app.set('trust proxy', 1);//允许信任上一级的反向代理
 
 app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
