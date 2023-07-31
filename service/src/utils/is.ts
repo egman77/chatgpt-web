@@ -1,3 +1,4 @@
+// 检测函数
 export function isNumber<T extends number>(value: T | unknown): value is number {
   return Object.prototype.toString.call(value) === '[object Number]'
 }
