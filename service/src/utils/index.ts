@@ -1,9 +1,11 @@
+// 发送响应选项
 interface SendResponseOptions<T = any> {
   type: 'Success' | 'Fail'
   message?: string
   data?: T
 }
 
+// 发送响应
 export function sendResponse<T>(options: SendResponseOptions<T>) {
   if (options.type === 'Success') {
     return Promise.resolve({
