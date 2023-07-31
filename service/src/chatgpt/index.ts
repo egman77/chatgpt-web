@@ -34,6 +34,7 @@ if (!isNotEmptyString(process.env.OPENAI_API_KEY) && !isNotEmptyString(process.e
 
 let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
+// 初始化代码
 (async () => {
   // More Info: https://github.com/transitive-bullshit/chatgpt-api
 
@@ -88,6 +89,7 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
   }
 })()
 
+// chat 回复处理
 async function chatReplyProcess(options: RequestOptions) {
   const { message, lastContext, process, systemMessage, temperature, top_p } = options
   try {
@@ -124,6 +126,7 @@ async function chatReplyProcess(options: RequestOptions) {
   }
 }
 
+// 获取用量
 async function fetchUsage() {
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY
   const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
@@ -164,6 +167,7 @@ async function fetchUsage() {
   }
 }
 
+// 格式化日期
 function formatDate(): string[] {
   const today = new Date()
   const year = today.getFullYear()
@@ -174,6 +178,7 @@ function formatDate(): string[] {
   return [formattedFirstDay, formattedLastDay]
 }
 
+// 聊天配置
 async function chatConfig() {
   const usage = await fetchUsage()
   const reverseProxy = process.env.API_REVERSE_PROXY ?? '-'
@@ -187,6 +192,7 @@ async function chatConfig() {
   })
 }
 
+// 设置代理
 function setupProxy(options: SetProxyOptions) {
   if (isNotEmptyString(process.env.SOCKS_PROXY_HOST) && isNotEmptyString(process.env.SOCKS_PROXY_PORT)) {
     const agent = new SocksProxyAgent({
@@ -215,6 +221,7 @@ function setupProxy(options: SetProxyOptions) {
   }
 }
 
+// 当前模型
 function currentModel(): ApiModel {
   return apiModel
 }
