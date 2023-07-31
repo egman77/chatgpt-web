@@ -19,6 +19,7 @@ app.all('*', (_, res, next) => {
   next()
 })
 
+// chat 处理
 router.post('/chat-process', [auth, limiter], async (req, res) => {
   res.setHeader('Content-type', 'application/octet-stream')
 
@@ -45,6 +46,7 @@ router.post('/chat-process', [auth, limiter], async (req, res) => {
   }
 })
 
+// 配置
 router.post('/config', auth, async (req, res) => {
   try {
     const response = await chatConfig()
@@ -55,6 +57,7 @@ router.post('/config', auth, async (req, res) => {
   }
 })
 
+// 会话
 router.post('/session', async (req, res) => {
   try {
     const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
@@ -66,6 +69,7 @@ router.post('/session', async (req, res) => {
   }
 })
 
+// 校验
 router.post('/verify', async (req, res) => {
   try {
     const { token } = req.body as { token: string }
@@ -82,8 +86,8 @@ router.post('/verify', async (req, res) => {
   }
 })
 
-app.use('', router);//可以直接
-app.use('/api', router);//也可以使用api
-app.set('trust proxy', 1);//允许信任上一级的反向代理
+app.use('', router) // 可以直接
+app.use('/api', router) // 也可以使用api
+app.set('trust proxy', 1) // 允许信任上一级的反向代理
 
-app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+app.listen(3002, () => globalThis.console.log('Server is running on port 3002')) // 默认3002端口
